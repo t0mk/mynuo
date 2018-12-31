@@ -113,7 +113,7 @@
 
 <!-- Preload -->
 <link rel="preload" href="{{ $style.RelPermalink }}" as="style">
-<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Anaheim" as="style">
 <link rel="preload" href="{{ $avatar.RelPermalink }}" as="image">
 <link rel="preload" href="{{ $bg.RelPermalink }}" as="image">
 
@@ -124,7 +124,26 @@
   }
 </style>
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim">
+
+{{ if isset .Params "ghfeed" }}
+{{ $ghss := resources.Get "styles/github-activity-0.1.5.min.css" }}
+<link rel="preload" href="{{ $ghss.RelPermalink }}" as="style">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css" as="style">
+<link rel="stylesheet" href="{{ $ghss.RelPermalink }}" as="style">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css" as="style">
+
+<style>
+.post-content img {
+    display: inline;
+    margin: 0;
+    margin-right: 2px;
+    box-shadow: none;
+
+}
+</style>
+
+{{ end }}
 
 <!-- Medium Zoom -->
 {{ if and (eq .Kind "page") (eq .Type "post") }}
@@ -135,3 +154,4 @@
 {{ if and (eq .Kind "page") (eq .Type "post") }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
 {{ end }}
+

@@ -1,5 +1,6 @@
 {{ $script := resources.Get "scripts/index.js" | resources.Minify }}
 
+
 <!-- Site Footer -->
 <footer class="site-footer">
   <p>© {{ if eq now.Year 2017 }}2017{{ else }}2017-{{ now.Year }}{{ end }} {{ .Site.Title }}</p>
@@ -45,7 +46,14 @@
 
 <!-- Main Scripts -->
 <script src="{{ $script.RelPermalink }}"></script>
-
+{{ if isset .Params "ghfeed" }}
+{{ $s1 := resources.Get "scripts/mustache.min.js" }}
+{{ $s2 := resources.Get "scripts/github-activity-0.1.5.min.js" }}
+{{ $s3 := resources.Get "scripts/feed.js" }}
+<script src="{{ $s1.RelPermalink }}"></script>
+<script src="{{ $s2.RelPermalink }}"></script>
+<script src="{{ $s3.RelPermalink }}"></script>
+{{ end }}
 <!-- Google Analytics -->
 {{ if .Site.GoogleAnalytics }}
 {{ template "_internal/google_analytics_async.html" . }}
